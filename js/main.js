@@ -41,7 +41,7 @@ function createForm() {
 
   const button = document.createElement("button");
   button.setAttribute("type", "submit");
-  button.setAttribute("class", "btn btn-primary mt-2");
+  button.setAttribute("class", "btn btn-primary mt-4 mb-4");
   button.textContent = "Get Weather";
   col2.appendChild(button);
 
@@ -56,7 +56,7 @@ function createForm() {
   main.appendChild(form);
 
   weatherDiv = document.createElement("div");
-  weatherDiv.classList.add("container");
+  weatherDiv.classList.add("container", "table-container");
   main.appendChild(weatherDiv);
 }
 
@@ -82,10 +82,11 @@ function displayWeatherData(weatherData) {
   }
 
   weatherDiv.innerHTML = `
+    <div class="container border-slash p-4">
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <div class= "table-container">
-          <table class="table">
+        <div class= "table-container position-relative">
+          <table class="table border border-dark">
             <thead>
               <tr class="text-center">
                 <th scope="col" colspan="2" style = "background-color: #00FF7F;" class="header-cell">City</th>
@@ -98,7 +99,7 @@ function displayWeatherData(weatherData) {
           </tbody>
         </table>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered border-dark">
           <thead>
             <tr class="text-center">
               <th scope="col" colspan="3" style = "background-color: #00FF7F" class="font-weight-bold">Temperature</th>
@@ -118,7 +119,7 @@ function displayWeatherData(weatherData) {
           </tbody>
         </table>
 
-        <table class="table table-bordered">
+        <table class="table border border-dark">
           <thead>
             <tr class="text-center">
               <th scope="col" colspan="1" style = "background-color: #00FF7F" class="font-weight-bold">Condition</th>
@@ -131,7 +132,7 @@ function displayWeatherData(weatherData) {
           </tbody>
         </table>
 
-        <table class="table table-bordered">
+        <table class="table border border-dark">
           <thead>
             <tr class="text-center">
               <th scope="col" colspan="1" style = "background-color: #00FF7F" class="font-weight-bold">Other Info</th>
@@ -145,8 +146,10 @@ function displayWeatherData(weatherData) {
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
     </div>
+  </div>
   `;
 }
 
