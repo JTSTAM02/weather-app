@@ -1,10 +1,13 @@
 # Weather App
 
 ### Start
-
+    * Create Input HTML field
+    * Button to click to get zipcode weather data
+    * addEventListener to the button
+        - On click, it will get the entered zipcode and call a function to get weather data
 ### Init
 
-#### Questions
+#### Questions for Function
 -How do we fetch location data from an API?
 // need an API key
 // API key = a9a57e468a763f78b091447412c6c924
