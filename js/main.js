@@ -1,30 +1,28 @@
 const apiKey = "a9a57e468a763f78b091447412c6c924";
+
 function createForm() {
-  const main = document.getElementById("main");
   const form = document.createElement("form");
   form.classList.add("form-group");
 
-  const label = document.createElement("label"); //dynamically creates text to Enter Zip Code
+  const label = document.createElement("label");
   label.setAttribute("for", "zipCodeInput");
-  label.textContent = "Enter Zip Code:"; 
+  label.textContent = "Enter Zip Code:";
 
-   const input = document.createElement("input"); // dynamically creates input box
+  const input = document.createElement("input");
   input.setAttribute("type", "text");
   input.setAttribute("class", "form-control");
   input.setAttribute("id", "zipCodeInput");
-  input.required = true; 
-  
+  input.required = true;
 
   const title = document.createElement("h1");
   title.textContent = "Weather App";
-  main.appendChild(title);
 
-  const button = document.createElement("button"); // dynamically creates button
+  const button = document.createElement("button");
   button.setAttribute("type", "submit");
   button.setAttribute("class", "btn btn-primary");
   button.textContent = "Get Weather";
-  
-  form.addEventListener("submit", function (event) { //calls for weather data when button is clicked
+
+  form.addEventListener("submit", function (event) {
     event.preventDefault();
     const zipCodeInput = document.getElementById("zipCodeInput");
     const zipCode = zipCodeInput.value;
@@ -32,7 +30,7 @@ function createForm() {
     zipCodeInput.value = "";
   });
 
-  form.append(title);
+  form.appendChild(title);
   form.appendChild(label);
   form.appendChild(input);
   form.appendChild(button);
@@ -42,7 +40,7 @@ function createForm() {
 function getWeatherData(zipCode) {
   const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=${apiKey}`;
 
-  axios // API fetch request
+  axios
     .get(url)
     .then(response => {
       const weatherData = response.data;
@@ -55,25 +53,25 @@ function getWeatherData(zipCode) {
 }
 
 function displayWeatherData(weatherData) {
-  const weatherDiv = document.getElementById("div");
+    const weatherDiv = document.createElement("div");
   weatherDiv.classList.add("card");
   weatherDiv.innerHTML = `
-      <div class="card-body">
-        <h5 class="card-title">${weatherData.name}</h5>
-        <p class="card-text">${weatherData.weather[0].description}</p>
-        <p class="card-text">Temperature: ${weatherData.main.temp} K</p>
-        <p class="card-text">Temperature: ${convertToFahrenheit(
-          weatherData.main.temp
-        )} °Fahrenheit</p>
-        <p class="card-text">Temperature: ${convertToCelsius(
-          weatherData.main.temp
-        )} °Celsius</p>
-        <img src="http://openweathermap.org/img/w/${
-          weatherData.weather[0].icon
-        }.png" alt="Weather Icon">
+    <div class="card-body">
+      <h5 class="card-title">${weatherData.name}</h5>
+      <p class="card-text">${weatherData.weather[0].description}</p>
+      <p class="card-text">Temperature: ${weatherData.main.temp} K</p>
+      <p class="card-text">Temperature: ${convertToFahrenheit(
+        weatherData.main.temp
+      )} °Fahrenheit</p>
+      <p class="card-text">Temperature: ${convertToCelsius(
+        weatherData.main.temp
+      )} °Celsius</p>
+      <img src="http://openweathermap.org/img/w/${
+        weatherData.weather[0].icon
+      }.png" alt="Weather Icon">
     </div>
   `;
-        
+
   const existingWeatherDiv = document.getElementById("weather");
   if (existingWeatherDiv) {
     main.replaceChild(weatherDiv, existingWeatherDiv);
@@ -84,8 +82,16 @@ function displayWeatherData(weatherData) {
 }
 
 function displayError(message) {
-  const errorDiv = document.getElementById("div");
+  const errorDiv = document.createElement("div");
   errorDiv.innerHTML = `<p>${message}</p>`;
+
+  const existingWeatherDiv = document.getElementById("weather");
+  if (existingWeatherDiv) {
+    main.replaceChild(errorDiv, existingWeatherDiv);
+  } else {
+    errorDiv.setAttribute("id", "weather");
+    main.appendChild(errorDiv);
+  }
 }
 
 function convertToFahrenheit(kelvin) {
