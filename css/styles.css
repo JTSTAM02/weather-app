@@ -1,22 +1,7 @@
-.border-slash {
-    border: 2px dashed black;
-    position: relative;
-    padding: 20px;
+.weather-container {
+  border: 1px dashed #000;
+  padding: 20px;
+}
 
-  }
-  
-  @media (max-width: 768px) {
-    .col-md-6 {
-        width: 100%;
-    }
-  }
 
-  .container {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .row.justify-content-center {
-    justify-content: center;
-  }
   

@@ -37,6 +37,9 @@ function createForm() {
   input.setAttribute("class", "form-control");
   input.setAttribute("id", "zipCodeInput");
   input.required = true;
+  input.style.width = "200px"; // Set the desired width of the input bar
+  input.style.marginLeft = "auto"; // Set left margin to "auto" for horizontal centering
+  input.style.marginRight = "auto"; // Set right margin to "auto" for horizontal centering
   col2.appendChild(input);
 
   const button = document.createElement("button");
@@ -56,7 +59,7 @@ function createForm() {
   main.appendChild(form);
 
   weatherDiv = document.createElement("div");
-  weatherDiv.classList.add("container", "table-container");
+  weatherDiv.classList.add("weatherDiv");
   main.appendChild(weatherDiv);
 }
 
@@ -82,76 +85,77 @@ function displayWeatherData(weatherData) {
   }
 
   weatherDiv.innerHTML = `
-    <div class="container border-slash p-4">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class= "table-container position-relative">
-          <table class="table border border-dark">
-            <thead>
-              <tr class="text-center">
-                <th scope="col" colspan="2" style = "background-color: #00FF7F;" class="header-cell">City</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="text-center">
-              <td>${weatherData.name}</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="container weatherDiv">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="weather-container">
+            <table class="table">
+              <thead>
+                <tr class="text-center">
+                  <th scope="col" colspan="2" style="background-color: #00FF7F;" class="header-cell">City</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center">
+                  <td>${weatherData.name}</td>
+                </tr>
+              </tbody>
+            </table>
 
-        <table class="table table-bordered border-dark">
-          <thead>
-            <tr class="text-center">
-              <th scope="col" colspan="3" style = "background-color: #00FF7F" class="font-weight-bold">Temperature</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="text-center">
-              <td>Kelvin</td>
-              <td>Fahrenheit</td>
-              <td>Celsius</td>
-            </tr>
-            <tr class="text-center">
-              <td>${weatherData.main.temp} K</td>
-              <td>${convertToFahrenheit(weatherData.main.temp)} °F</td>
-              <td>${convertToCelsius(weatherData.main.temp)} °C</td>
-            </tr>
-          </tbody>
-        </table>
+            <table class="table table-bordered">
+              <thead>
+                <tr class="text-center">
+                  <th scope="col" colspan="3" style="background-color: #00FF7F" class="font-weight-bold">Temperature</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center">
+                  <td>Kelvin</td>
+                  <td>Fahrenheit</td>
+                  <td>Celsius</td>
+                </tr>
+                <tr class="text-center">
+                  <td>${weatherData.main.temp} K</td>
+                  <td>${convertToFahrenheit(weatherData.main.temp)} °F</td>
+                  <td>${convertToCelsius(weatherData.main.temp)} °C</td>
+                </tr>
+              </tbody>
+            </table>
 
-        <table class="table border border-dark">
-          <thead>
-            <tr class="text-center">
-              <th scope="col" colspan="1" style = "background-color: #00FF7F" class="font-weight-bold">Condition</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="text-center">
-              <td>${weatherData.weather[0].description}</td>
-            </tr>
-          </tbody>
-        </table>
+            <table class="table border border-dark">
+              <thead>
+                <tr class="text-center">
+                  <th scope="col" colspan="1" style="background-color: #00FF7F" class="font-weight-bold">Condition</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center">
+                  <td>${weatherData.weather[0].description}</td>
+                </tr>
+              </tbody>
+            </table>
 
-        <table class="table border border-dark">
-          <thead>
-            <tr class="text-center">
-              <th scope="col" colspan="1" style = "background-color: #00FF7F" class="font-weight-bold">Other Info</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="text-center">
-              <td>
-                <img src="http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" alt="Weather Icon">
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            <table class="table border border-dark">
+              <thead>
+                <tr class="text-center">
+                  <th scope="col" colspan="1" style="background-color: #00FF7F" class="font-weight-bold">Other Info</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center">
+                  <td>
+                    <img src="http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png" alt="Weather Icon">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   `;
 }
+
 
 function displayError(message) {
   const errorDiv = document.createElement("div");
