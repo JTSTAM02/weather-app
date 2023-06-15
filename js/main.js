@@ -3,7 +3,6 @@ let weatherDiv = null;
 
 function createForm() {
   const form = document.createElement("form");
-  form.classList.add("form-group");
 
   const container = document.createElement("div");
   container.classList.add("container");
@@ -50,11 +49,11 @@ function createForm() {
   col2.appendChild(button);
 
   form.addEventListener("submit", function (event) {
-    event.preventDefault();
+    event.preventDefault(); //keeps data on screen
     const zipCodeInput = document.getElementById("zipCodeInput");
     const zipCode = zipCodeInput.value;
     getWeatherData(zipCode);
-    zipCodeInput.value = "";
+    zipCodeInput.value = ""; //gives dropdown of previous entries
   });
 
   main.appendChild(form);
@@ -72,22 +71,23 @@ function getWeatherData(zipCode) {
     .then(response => {
       const weatherData = response.data;
       displayWeatherData(weatherData);
-      removeErrorMessage();
+      removeErrorMessage(); // removes extra error message
     })
     .catch(error => {
       displayError("An error occurred while fetching weather data.");
       console.error(error);
     });
 }
-
+// removes error message after intiial display to show weather data
 function removeErrorMessage() {
   const errorDiv = document.querySelector(".alert.alert-danger");
   if (errorDiv) {
     errorDiv.remove();
   }
 }
+
 function displayWeatherData(weatherData) {
-  if (weatherData.cod && weatherData.cod !== 200) {
+  if (weatherData.cod !== 200) { // checks if status is not correct
     displayError("Invalid Zip Code. Please try again.");
     return;
   }
@@ -123,7 +123,7 @@ function displayWeatherData(weatherData) {
                   <td>Celsius</td>
                 </tr>
                 <tr class="text-center">
-                  <td>${weatherData.main.temp} K</td>
+                  <td>${weatherData.main.temp} °K</td>
                   <td>${convertToFahrenheit(weatherData.main.temp)} °F</td>
                   <td>${convertToCelsius(weatherData.main.temp)} °C</td>
                 </tr>
@@ -138,7 +138,7 @@ function displayWeatherData(weatherData) {
               </thead>
               <tbody>
                 <tr class="text-center">
-                  <td>${weatherData.weather[0].description}</td>
+                  <td>${weatherData.weather[0].description}</td> 
                 </tr>
               </tbody>
             </table>
@@ -191,11 +191,13 @@ function displayError(message) {
 
 
 function convertToFahrenheit(kelvin) {
-  return ((kelvin - 273.15) * 1.8 + 32).toFixed(2);
+  const fahrenheit = (kelvin - 273.15) * (9 / 5) + 32;
+  return fahrenheit.toFixed(2); // toFixed stops after set amount of decimal points
 }
 
 function convertToCelsius(kelvin) {
-  return (kelvin - 273.15).toFixed(2);
+  const celsius = (kelvin - 273.15);
+  return celsius.toFixed(2);
 }
 
 // Call the createForm function to dynamically create the form
