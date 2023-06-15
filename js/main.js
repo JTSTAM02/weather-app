@@ -80,9 +80,9 @@ function getWeatherData(zipCode) {
     });
 }
 
-  function removeErrorMessage() {
-    const errorDiv = document.querySelector(".alert.alert-danger");
-    if(errorDiv) {
+function removeErrorMessage() {
+  const errorDiv = document.querySelector(".alert.alert-danger");
+  if (errorDiv) {
     errorDiv.remove();
   }
 }
