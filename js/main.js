@@ -18,6 +18,7 @@ function createForm() {
 
   const title = document.createElement("h1");
   title.textContent = "Weather App";
+  title.style.margin = "20px";
   col1.appendChild(title);
 
   const row2 = document.createElement("div");
@@ -71,6 +72,7 @@ function getWeatherData(zipCode) {
     .then(response => {
       const weatherData = response.data;
       displayWeatherData(weatherData);
+      removeErrorMessage();
     })
     .catch(error => {
       displayError("An error occurred while fetching weather data.");
@@ -78,8 +80,14 @@ function getWeatherData(zipCode) {
     });
 }
 
+  function removeErrorMessage() {
+    const errorDiv = document.querySelector(".alert.alert-danger");
+    if(errorDiv) {
+    errorDiv.remove();
+  }
+}
 function displayWeatherData(weatherData) {
-  if (weatherData.cod === "404") {
+  if (weatherData.cod && weatherData.cod !== 200) {
     displayError("Invalid Zip Code. Please try again.");
     return;
   }
@@ -158,9 +166,14 @@ function displayWeatherData(weatherData) {
 
 
 function displayError(message) {
-  const errorDiv = document.createElement("div");
-  errorDiv.classList.add("container");
-  errorDiv.innerHTML = `
+  const errorDiv = document.querySelector(".alert.alert-danger");
+  if (errorDiv) {
+    errorDiv.remove();
+  }
+
+  const errorContainer = document.createElement("div");
+  errorContainer.classList.add("container");
+  errorContainer.innerHTML = `
     <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="alert alert-danger text-center" role="alert">
@@ -170,8 +183,12 @@ function displayError(message) {
     </div>
   `;
 
-  main.appendChild(errorDiv);
+  main.appendChild(errorContainer);
+
+  // Remove any existing weather data
+  weatherDiv.innerHTML = "";
 }
+
 
 function convertToFahrenheit(kelvin) {
   return ((kelvin - 273.15) * 1.8 + 32).toFixed(2);
