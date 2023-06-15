@@ -71,8 +71,6 @@
       
 
    - displayError() {
-      error = document.createElement("div")
-      error.innerHTML = `<p> {message}</p>`;
       if no error, remove it;
      }
 
