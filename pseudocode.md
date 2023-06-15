@@ -5,8 +5,7 @@
     * Button to click to get zipcode weather data
     * addEventListener to the button
         - On click, it will get the entered zipcode and call a function to get weather data
-**       STRETCH GOAL-Create these elements in JavaScript using .createElement("")
-**
+**       STRETCH GOAL-Create these elements in JavaScript using .createElement("")    **
 
 ### Init (AKA Render/displayWeatherData function)
 
@@ -17,15 +16,15 @@
 // need an API key
 // API key = a9a57e468a763f78b091447412c6c924
 - What variables do I need to create?
-      * displayWeatherData
       * apiKey
       * form, label, button, title
-      * 
+
 - What functions do I need?
    - Major functions nested into createForm (stretch goal)     
       * getWeatherData (to fetch weather data from API)
       * displayWeatherData (renders data onto file)
       * displayError for error to the right of the chart
+      * removeErrorMessage to remove error and again display weather data
       * functions for each temperature (check silly story generator)
 
 
@@ -86,9 +85,40 @@
       classList.add("form-group");
       document.createElement("div");
       }
+      
+   function getWeatherData(zipCode) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=${apiKey}`;
+
+  axios
+    .get(url)
+    .then(response => {
+      const weatherData = response.data;
+      displayWeatherData(weatherData);
+      removeErrorMessage();
+    })
+    .catch(error => {
+      displayError("An error occurred while fetching weather data.");
+      console.error(error);
+    });
+}
+
+function removeErrorMessage() {
+  const errorDiv = document.querySelector(".alert.alert-danger");
+  if (errorDiv) {
+    errorDiv.remove();
+  }
  
    
- 
+ function convertToFahrenheit(kelvin) {
+  return ((kelvin - 273.15) * 1.8 + 32).toFixed(2);
+}
+
+function convertToCelsius(kelvin) {
+  return (kelvin - 273.15).toFixed(2);
+}
+
+-call function at end
+   createForm();
  
  
  
