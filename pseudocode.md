@@ -25,9 +25,8 @@
    - Major functions nested into createForm (stretch goal)     
       * getWeatherData (to fetch weather data from API)
       * displayWeatherData (renders data onto file)
-      * checkUserInput (to check if zipcode entered or not-if not, display error message)
       * displayError for error to the right of the chart
-      * function for each temperature (check silly story generator)
+      * functions for each temperature (check silly story generator)
 
 
 #### User Perspective
@@ -56,7 +55,7 @@
       * form, label, title, button    
   - getWeatherData() {
       axios code
-      try {
+      get {
       }
       catch {
       }
