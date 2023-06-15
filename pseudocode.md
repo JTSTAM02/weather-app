@@ -60,18 +60,34 @@
       catch {
       }
 };
+   * getWeatherData needs input parameter of zipCode
+
+
+   - removdErrorMessage() {
+      if error message not needed, remove it
+      
+      
+   -displayWeatherData(weatherData) {
+      if error, displayError function
+      
 
    - displayError() {
       error = document.createElement("div")
-      error.innerHTML = `<p> {message}</p>;
+      error.innerHTML = `<p> {message}</p>`;
+      if no error, remove it;
      }
 
-
+   -convertToF
+   -convertToC (see Silly Story Generator)
+   
 ## Object Oriented
-
-
+   createForm() {
+      document.createElement("form");
+      classList.add("form-group");
+      document.createElement("div");
+      }
  
- 
+   
  
  
  
