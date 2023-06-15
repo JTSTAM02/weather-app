@@ -48,7 +48,7 @@
       - use bootstrap layout
 ### End
 
-##Functional
+## Functional
 
   - start with createForm()
     * declare variabes
@@ -67,7 +67,7 @@
      }
 
 
-##Object Oriented
+## Object Oriented
 
 
  
