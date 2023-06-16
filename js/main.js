@@ -1,11 +1,10 @@
 const apiKey = "a9a57e468a763f78b091447412c6c924";
-let weatherDiv = null; // why is this here?
+let weatherDiv; // used to display weather data later
 
 function createForm() {
   const form = document.createElement("form");
-
   const container = document.createElement("div");
-  container.classList.add("container");
+  container.classList.add("container"); // adds class of container to the div
   form.appendChild(container);
 
   const row1 = document.createElement("div");
@@ -36,10 +35,10 @@ function createForm() {
   input.setAttribute("type", "text");
   input.setAttribute("class", "form-control");
   input.setAttribute("id", "zipCodeInput");
-  input.required = true;
-  input.style.width = "200px"; // Set the desired width of the input bar
-  input.style.marginLeft = "auto"; // Set left margin to "auto" for horizontal centering
-  input.style.marginRight = "auto"; // Set right margin to "auto" for horizontal centering
+  input.required = true; // makes input necessary
+  input.style.width = "200px";
+  input.style.marginLeft = "auto"; 
+  input.style.marginRight = "auto";
   col2.appendChild(input);
 
   const button = document.createElement("button");
