@@ -1,5 +1,5 @@
 const apiKey = "a9a57e468a763f78b091447412c6c924";
-let weatherDiv = null;
+let weatherDiv = null; // why is this here?
 
 function createForm() {
   const form = document.createElement("form");
